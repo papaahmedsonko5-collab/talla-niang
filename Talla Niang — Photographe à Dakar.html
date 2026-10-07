@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Talla Niang — Photographe & film maker à Dakar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ECEAE6; --ink:#151922; --mute:#6E7178; --line:#CFCCC6; --card:#F6F4F0; --red:#D2342A; --on-red:#fff;
+  --display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+  --body:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--paper:#12151B;--ink:#ECEAE6;--mute:#9A9DA4;--line:#2A2E37;--card:#1A1E26;}
+}
+:root[data-theme="dark"]{--paper:#12151B;--ink:#ECEAE6;--mute:#9A9DA4;--line:#2A2E37;--card:#1A1E26;}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+/* nav */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:var(--display);font-weight:800;text-decoration:none;font-size:19px;letter-spacing:-.01em}
+nav{display:flex;gap:20px;align-items:center;font-size:15px;font-weight:500}
+nav a{text-decoration:none;color:var(--mute)}
+nav a:hover{color:var(--ink)}
+nav .cta{background:var(--ink);color:var(--paper);padding:8px 16px;border-radius:999px}
+nav .cta:hover{color:var(--paper);background:var(--red)}
+@media(max-width:620px){nav a:not(.cta){display:none}}
+
+/* hero = viseur */
+.hero{padding:44px 0 70px}
+.finder{position:relative;border:0;padding:clamp(28px,6vw,64px) clamp(20px,5vw,56px);min-height:min(78vh,620px);display:flex;flex-direction:column;justify-content:space-between}
+.finder i{position:absolute;width:34px;height:34px;border-color:var(--ink);border-style:solid;border-width:0}
+.finder i:nth-of-type(1){top:0;left:0;border-top-width:3px;border-left-width:3px}
+.finder i:nth-of-type(2){top:0;right:0;border-top-width:3px;border-right-width:3px}
+.finder i:nth-of-type(3){bottom:0;left:0;border-bottom-width:3px;border-left-width:3px}
+.finder i:nth-of-type(4){bottom:0;right:0;border-bottom-width:3px;border-right-width:3px}
+.rec{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--mute);font-weight:500}
+.rec b{width:11px;height:11px;border-radius:50%;background:var(--red);animation:blink 1.6s steps(2,start) infinite}
+@keyframes blink{50%{opacity:.15}}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(54px,13vw,168px);line-height:.88;letter-spacing:-.04em;margin:40px 0 28px}
+.hero p{max-width:34ch;font-size:clamp(18px,2.4vw,22px);margin:0 0 30px;color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;font:600 16px var(--body);text-decoration:none;padding:14px 24px;border-radius:999px;border:2px solid var(--ink);cursor:pointer;background:transparent;color:var(--ink)}
+.btn.main{background:var(--red);border-color:var(--red);color:var(--on-red)}
+.btn:hover{transform:translateY(-1px)}
+.btn.main:hover{filter:brightness(1.08)}
+
+/* sections */
+section{padding:70px 0;border-top:1px solid var(--line)}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,6vw,64px);line-height:1;letter-spacing:-.03em;margin:0 0 14px}
+.lead{color:var(--mute);max-width:52ch;margin:0 0 38px}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border:1px solid var(--line)}
+.svc{padding:28px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0;background:var(--card)}
+.svc h3{font-family:var(--display);font-size:24px;margin:0 0 8px;letter-spacing:-.02em}
+.svc p{margin:0;color:var(--mute);font-size:16px}
+
+/* portfolio */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.filters button{font:500 15px var(--body);padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.grid{columns:3 260px;column-gap:14px}
+.shot{break-inside:avoid;margin:0 0 14px;position:relative;overflow:hidden;border-radius:4px;background:var(--card)}
+.shot img{display:block;width:100%;height:auto}
+.ph{display:flex;align-items:flex-end;padding:14px;color:#fff;font-size:14px;font-weight:500;width:100%}
+.ph span{background:rgba(0,0,0,.42);padding:4px 10px;border-radius:999px}
+.shot[hidden]{display:none}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1.15fr;gap:48px}
+@media(max-width:820px){.contact{grid-template-columns:1fr;gap:34px}}
+.direct a{display:block;font-family:var(--display);font-weight:600;font-size:clamp(20px,3.4vw,28px);text-decoration:none;padding:14px 0;border-bottom:1px solid var(--line);word-break:break-word}
+.direct a small{display:block;font:500 14px var(--body);color:var(--mute)}
+.direct a:hover{color:var(--red)}
+form{background:var(--card);border:1px solid var(--line);padding:26px;border-radius:6px;display:grid;gap:16px}
+label{display:grid;gap:6px;font-weight:600;font-size:15px}
+input,select,textarea{font:400 16px var(--body);padding:12px 14px;border:1.5px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);width:100%}
+textarea{min-height:100px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.two{grid-template-columns:1fr}}
+.note{font-size:14px;color:var(--mute);margin:0}
+footer{padding:34px 0 50px;border-top:1px solid var(--line);color:var(--mute);font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">Talla Niang</a>
+    <nav>
+      <a href="#services">Prestations</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact" class="cta">Réserver</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="finder">
+      <i></i><i></i><i></i><i></i>
+      <div class="rec"><b></b> Dakar, Sénégal — disponible sur réservation</div>
+      <div>
+        <h1>Talla<br>Niang</h1>
+        <p>Photographe et film maker. Portraits, mariages et vidéos à Dakar.</p>
+        <div class="row">
+          <a class="btn main" href="#contact">Planifier un shooting</a>
+          <a class="btn" href="#portfolio">Voir mon travail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <h2>Ce que je fais</h2>
+      <p class="lead">Un shooting, une vidéo ou une journée complète. Dis-moi ce qu'il te faut, je te réponds avec un devis.</p>
+      <div class="services">
+        <div class="svc"><h3>Portrait</h3><p>Shooting en studio ou en extérieur, retouches incluses.</p></div>
+        <div class="svc"><h3>Mariage</h3><p>Préparatifs, cérémonie et soirée, photos et vidéo.</p></div>
+        <div class="svc"><h3>Événement</h3><p>Soirées, lancements, conférences, remises de diplômes.</p></div>
+        <div class="svc"><h3>Film &amp; clip</h3><p>Tournage et montage : clips, aftermovies, contenus de marque.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="wrap">
+      <h2>Portfolio</h2>
+      <p class="lead">Une sélection de séances récentes. Plus de travaux sur Instagram.</p>
+      <div class="filters" role="group" aria-label="Filtrer le portfolio">
+        <button aria-pressed="true" data-f="all">Tout</button>
+        <button aria-pressed="false" data-f="Portrait">Portrait</button>
+        <button aria-pressed="false" data-f="Mariage">Mariage</button>
+        <button aria-pressed="false" data-f="Film">Film</button>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="note" style="margin-top:18px"><a href="https://www.instagram.com/g.r.a.p.h.i.s.t.e.t.a.l.l.a" target="_blank" rel="noopener">Voir tout sur Instagram</a></p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <h2>Réserver</h2>
+        <p class="lead">Remplis le formulaire : ta demande part directement sur WhatsApp ou par mail.</p>
+        <div class="direct">
+          <a href="https://wa.me/221781354837" target="_blank" rel="noopener"><small>WhatsApp / téléphone</small>78 135 48 37</a>
+          <a href="mailto:niangelhadjitalla@gmail.com"><small>Email</small>niangelhadjitalla@gmail.com</a>
+          <a href="https://www.instagram.com/g.r.a.p.h.i.s.t.e.t.a.l.l.a" target="_blank" rel="noopener"><small>Instagram</small>@g.r.a.p.h.i.s.t.e.t.a.l.l.a</a>
+        </div>
+      </div>
+
+      <form id="f" novalidate>
+        <label>Ton nom
+          <input name="nom" autocomplete="name" required>
+        </label>
+        <label>Type de shooting
+          <select name="type">
+            <option>Portrait</option>
+            <option>Mariage</option>
+            <option>Événement</option>
+            <option>Film / clip</option>
+            <option>Autre</option>
+          </select>
+        </label>
+        <div class="two">
+          <label>Date souhaitée
+            <input type="date" name="date">
+          </label>
+          <label>Lieu
+            <input name="lieu" placeholder="Dakar, Almadies…">
+          </label>
+        </div>
+        <label>Détails
+          <textarea name="msg" placeholder="Nombre de personnes, style recherché, budget…"></textarea>
+        </label>
+        <div class="row">
+          <button type="button" class="btn main" id="wa">Envoyer sur WhatsApp</button>
+          <button type="button" class="btn" id="mail">Envoyer par email</button>
+        </div>
+        <p class="note" id="err" role="alert" style="color:var(--red)" hidden>Ajoute ton nom pour continuer.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Talla Niang — Dakar, Sénégal</span>
+    <span><a href="#top">Retour en haut</a></span>
+  </div>
+</footer>
+
+<script>
+/* ====== PORTFOLIO ======
+   Pour mettre ses vraies photos : remplacer "src" par un lien d'image
+   (ou une image en data:URI) et supprimer "tone". Ratio libre.        */
+var SHOTS=[
+  {cat:"Mariage",title:"Mariée — préparatifs",ratio:"4/5",tone:"#CFC8C0"},
+  {cat:"Portrait",title:"Portrait lunettes",ratio:"4/5",tone:"#7A5A45"},
+  {cat:"Film",title:"Robe de mariée — vidéo",ratio:"3/4",tone:"#B9B4AC"},
+  {cat:"Portrait",title:"Studio noir et blanc",ratio:"1/1",tone:"#3A3C42"},
+  {cat:"Mariage",title:"Cérémonie",ratio:"5/4",tone:"#A89F93"},
+  {cat:"Film",title:"Clip — extrait",ratio:"16/10",tone:"#2E3340"}
+];
+var grid=document.getElementById('grid');
+SHOTS.forEach(function(s){
+  var f=document.createElement('figure');f.className='shot';f.dataset.cat=s.cat;
+  if(s.src){var i=document.createElement('img');i.src=s.src;i.alt=s.title;i.loading='lazy';f.appendChild(i);}
+  else{var d=document.createElement('div');d.className='ph';d.style.aspectRatio=s.ratio;d.style.background='linear-gradient(160deg,'+s.tone+',color-mix(in srgb,'+s.tone+' 60%,#000))';d.innerHTML='<span>'+s.title+'</span>';f.appendChild(d);}
+  grid.appendChild(f);
+});
+document.querySelectorAll('.filters button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.filters button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+    b.setAttribute('aria-pressed','true');
+    var k=b.dataset.f;
+    document.querySelectorAll('.shot').forEach(function(s){s.hidden=!(k==='all'||s.dataset.cat===k)});
+  });
+});
+
+/* ====== RÉSERVATION ====== */
+var form=document.getElementById('f'),err=document.getElementById('err');
+function build(){
+  var d=new FormData(form),nom=(d.get('nom')||'').trim();
+  if(!nom){err.hidden=false;form.nom.focus();return null;}
+  err.hidden=true;
+  var date=d.get('date');
+  if(date){var p=date.split('-');date=p[2]+'/'+p[1]+'/'+p[0];}
+  return "Bonjour Talla, c'est "+nom+". Je voudrais réserver un shooting.\n"+
+    "Type : "+d.get('type')+"\n"+
+    "Date souhaitée : "+(date||"à définir")+"\n"+
+    "Lieu : "+((d.get('lieu')||'').trim()||"à définir")+"\n"+
+    "Détails : "+((d.get('msg')||'').trim()||"—");
+}
+document.getElementById('wa').addEventListener('click',function(){
+  var t=build();if(t)window.open('https://wa.me/221781354837?text='+encodeURIComponent(t),'_blank','noopener');
+});
+document.getElementById('mail').addEventListener('click',function(){
+  var t=build();if(t)location.href='mailto:niangelhadjitalla@gmail.com?subject='+encodeURIComponent('Demande de shooting')+'&body='+encodeURIComponent(t);
+});
+</script>
+</body>
+</html>
