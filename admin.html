@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Admin, Talla Niang</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#12151B">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Admin Talla">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
 :root{--bg:#12151B;--card:#1A1E26;--paper:#12151B;--ink:#ECEAE6;--mute:#A3A6AD;--line:#2A2E37;
   --accent:#E0463B;--accent-soft:rgba(224,70,59,.14);
@@ -1003,6 +1010,9 @@ function init(){
 }
 init();
 })();
+</script>
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
 </script>
 </body>
 </html>
