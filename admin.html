@@ -573,7 +573,7 @@ VIEWS.dashboard=function(){
           h('div',{class:'panel',style:'margin-bottom:16px'},h('h3',{text:'Types de shooting'}),barList(top(types,5))),
           h('div',{class:'panel'},h('h3',{text:'Contenu du site'}),
             stat('Photos',pub(photos)+' / '+photos.length,'photos'),stat('Vidéos',pub(videos)+' / '+videos.length,'videos'),
-            stat('Témoignages',pub(tms)+' / '+tms.length,'testimonials'),stat('Packs',String(packs.length),'packs'),
+            stat('Témoignages',pub(tms)+' / '+tms.length,'testimonials'),stat('Packs',String(packs.length),'packs'),stat('Dernière sauvegarde',lastBackup(),'settings'),
             h('div',{class:'stat'},h('span',{text:'Site relié à l\'admin'}),h('b',{text:st.content_live==='1'?'Oui':'Non'}))))));
       body.appendChild(h('div',{class:'panel',style:'margin-top:16px'},h('h3',{text:'Packs les plus demandés'}),barList(top(pk,6))));
     }
@@ -816,6 +816,32 @@ VIEWS.packs=function(){
   });
 };
 
+/* ---------- Sauvegarde ---------- */
+var BKEY='tn_last_backup';
+function lastBackup(){try{var v=localStorage.getItem(BKEY);return v?fdate(v):'Jamais'}catch(e){return 'Jamais'}}
+function download(name,text,type){
+  var b=new Blob([text],{type:type}),u=URL.createObjectURL(b),a=document.createElement('a');
+  a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){URL.revokeObjectURL(u)},4000);
+}
+function backupAll(){
+  var tables=['site_settings','photos','videos','testimonials','packs','bookings'];
+  return Promise.all(tables.map(function(t){return db.get(t,'select=*')})).then(function(r){
+    var o={sauvegarde:ymd(new Date()),projet:'talla-niang'};
+    tables.forEach(function(t,i){o[t]=r[i]});
+    download('sauvegarde-talla-'+ymd(new Date())+'.json',JSON.stringify(o,null,2),'application/json');
+    try{localStorage.setItem(BKEY,ymd(new Date()))}catch(e){}
+  });
+}
+function csvCell(v){v=v==null?'':String(v);return '"'+v.replace(/"/g,'""')+'"'}
+function exportBookings(){
+  return db.get('bookings','select=*&order=created_at.desc').then(function(rows){
+    var cols=['created_at','name','contact','type','pack','date','place','details','status'];
+    var lines=[cols.join(',')].concat(rows.map(function(r){return cols.map(function(c){return csvCell(r[c])}).join(',')}));
+    download('reservations-'+ymd(new Date())+'.csv','\ufeff'+lines.join('\n'),'text/csv;charset=utf-8');
+  });
+}
+
 /* ---------- Textes du site ---------- */
 var FIELDS=[
   ['availability','Ligne en haut de l\'accueil','text'],
@@ -852,6 +878,13 @@ VIEWS.settings=function(){
     box.appendChild(h('div',{class:'card'},h('h3',{text:'Contenu du site'}),
       h('label',{style:'display:flex;align-items:center;gap:8px;font-weight:400'},live,'Le site affiche les photos, vidéos et tarifs de cette admin'),
       h('p',{class:'muted',text:'Décoché, le site revient au contenu d\'origine.'})));
+    var bkBtn=h('button',{class:'btn main',type:'button',text:'Télécharger la sauvegarde'}),csvBtn=h('button',{class:'btn',type:'button',text:'Exporter les réservations (CSV)'});
+    var bkInfo=h('p',{class:'muted',text:'Dernière sauvegarde : '+lastBackup()});
+    bkBtn.addEventListener('click',function(){act(bkBtn,function(){return backupAll().then(function(){bkInfo.textContent='Dernière sauvegarde : '+lastBackup()})},'Sauvegarde téléchargée')});
+    csvBtn.addEventListener('click',function(){act(csvBtn,exportBookings,'Fichier téléchargé')});
+    box.appendChild(h('div',{class:'card'},h('h3',{text:'Sauvegarde'}),
+      h('p',{class:'muted',text:'Télécharge une copie de toutes les données (photos et vidéos listées, tarifs, textes, témoignages, réservations). Fais-le une fois par mois et garde le fichier sur ton téléphone ou ton ordinateur. Les originaux des photos et vidéos restent à garder de ton côté.'}),
+      h('div',{class:'row'},bkBtn,csvBtn),bkInfo));
     return box;
   });
 };
