@@ -1,30 +1,17 @@
- Garde le projet Supabase actif (évite la mise en pause de l'offre gratuite).
-# À placer dans le dépôt GitHub sous le nom : .github/workflows/keepalive.yml
 name: Garder Supabase actif
- 
+
 on:
   schedule:
-    - cron: "17 6 * * *"      # tous les jours vers 06h17 (heure UTC)
-  workflow_dispatch:           # permet aussi de le lancer à la main
- 
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
 jobs:
   ping:
     runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: "https://emeeosqhflvqibhwjihu.supabase.co"
+      SUPABASE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtZWVvc3FoZmx2cWliaHdqaWh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0Njk0NzMsImV4cCI6MjEwNzA0NTQ3M30.GgQn92Rsx_CBbxt14WyGKxoEmXa-Rzum0_KFKPASt2M"
     steps:
-      - uses: actions/checkout@v4
- 
-      - name: Interroger la base (lit config.js)
+      - name: Interroger la base
         run: |
-          URL=$(grep -oP 'url:\s*"\K[^"]+' config.js | head -1)
-          KEY=$(grep -oP 'key:\s*"\K[^"]+' config.js | head -1)
-          if [ -z "$URL" ] || [ -z "$KEY" ]; then
-            echo "config.js n'est pas rempli : rien à faire."
-            exit 0
-          fi
-          curl -sS -f \
-            -H "apikey: $KEY" \
-            -H "Authorization: Bearer $KEY" \
-            "$URL/rest/v1/site_settings?select=key&limit=1"
-          echo
-          echo "Base interrogée avec succès."
- 
+          curl -sS -f -H "apikey: $SUPABASE_KEY" -H "Authorization: Bearer $SUPABASE_KEY" "$SUPABASE_URL/rest/v1/site_settings?select=key&limit=1"
